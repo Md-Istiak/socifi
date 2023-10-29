@@ -277,7 +277,7 @@ const App = () => {
   }}
   onRow={(record) => {
     return {
-      onClick: (e) => {router.push(`http://localhost:3000/user/nft?address=${record.key}`)}, // click row
+      onClick: (e) => {router.push(`https://socifi.vercel.app/user/nft?address=${record.key}`)}, // click row
     };
   }}/>;
 };

@@ -162,8 +162,9 @@ console.log(encodeBytes)
 // console.log(customHttpProvider)
   const thriftyNFT = new Contract("0x205D8513bC1ad6F5345C73392A49D629A7b8b5c0", thriftyABI, provider);
   const ThriftNFTsigner = thriftyNFT.connect(signer)
+  const tokenid = await thriftyNFT._tokenIds();
   const message = EthCrypto.hash.keccak256([
-    {type: "string",value: `${await thriftyNFT._tokenIds()} , ${account}`}
+    {type: "string",value: `${tokenid} , ${account}`}
   ]);
   const signature = EthCrypto.sign('0x045bf9e0ed1b2653ebe288b5bfc6a5d30936764f35ec8d9f69b59bbddc513cbf', message);
  
@@ -178,8 +179,10 @@ console.log(encodeBytes)
           signature
     )
     const Tx = await tx.wait(1)
-    console.log(Tx)
+    const newUser = await ThriftNFTsigner.TBAbytokenId(tokenid);
+    return newUser;
   }catch(err){
     console.log(err.message)
   }
+  
 }
