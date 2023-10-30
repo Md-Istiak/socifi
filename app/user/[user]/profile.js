@@ -30,15 +30,16 @@ export default function UserProfilePage() {
 
     console.log(value)
     useEffect(()=>{
+      var customHttpProvider = new JsonRpcProvider(
+        "https://api.avax-test.network/ext/C/rpc"
+      );
+    const thriftyNFT = new Contract("0x205D8513bC1ad6F5345C73392A49D629A7b8b5c0", thriftyABI, customHttpProvider);
         const getContract = async ()=>{
             let userAddress = 0 ;
             if(params.has("address")){
               userAddress = params.get("address")
             }else{
-                var customHttpProvider = new JsonRpcProvider(
-                    "https://api.avax-test.network/ext/C/rpc"
-                  );
-                const thriftyNFT = new Contract("0x205D8513bC1ad6F5345C73392A49D629A7b8b5c0", thriftyABI, customHttpProvider);
+               
                 if(params.has("userid")){
                     const useerid = params.get("userid");
                     const tokenId = await thriftyNFT.userByTokenId(useerid)
@@ -50,17 +51,10 @@ export default function UserProfilePage() {
                 }
             }
             setAddress(userAddress)
-            
-                // const accountNFT = new Contract(userAddress, accountABI, customHttpProvider);
-                // setNFT(accountNFT)
-                // let _price = []
-                // setBPrice(Number((await accountNFT.Tier(1))[0]))
-                // setPPrice(Number((await accountNFT.Tier(2))[0]))
-                // setUPrice(Number((await accountNFT.Tier(3))[0]))
-                //  _price.push(Number((await accountNFT.Tier(1))[0]))
-                //  _price.push(Number((await accountNFT.Tier(2))[0]))
-                //  _price.push(Number((await accountNFT.Tier(3))[0]))
-                //  setPrice(_price)
+           const accountNFT = new Contract(userAddress, accountABI, customHttpProvider);
+           setNFT(accountNFT)
+           setURI(await thriftyNFT)
+             
                 
             
           
@@ -78,7 +72,7 @@ export default function UserProfilePage() {
             
             <Card className="w-full md:w-5/6 sm:w-400px  mt-1">
              <CardHeader className=" flex flex-col pt-5 p-x-2">
-               <ProfileTab address={nftAddress} />
+               <ProfileTab address={nftAddress} nft={nft}/>
              </CardHeader>
              </Card>
             <Divider className="my-1" />

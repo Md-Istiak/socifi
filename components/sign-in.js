@@ -151,7 +151,7 @@ export default  function SignIn(){
                 
                 <div className="flex items-center justify-center gap-3">
                   <Checkbox isRequired isDisabled={state == "authenticated"} isSelected={select || state == "authenticated"} icon={<FiGithub/>} size="lg" color="warning" onChange={()=>chnageHandler("github")}><p className="font-semibold text-default-400 text-small mx-1">GitHub</p></Checkbox>
-                   <Checkbox isRequired isDisabled={state == "authenticated"} isSelected={select || state == "authenticated"} icon={<FiTwitter/>} color="warning" size="lg" onChange={()=>chnageHandler("github")}><p className="font-semibold text-default-400 text-small mx-1">Twitter</p></Checkbox>
+                   <Checkbox isRequired isDisabled={state == "authenticated"} isSelected={select || state == "authenticated"} icon={<FiTwitter/>} color="warning" size="lg" onChange={()=>chnageHandler("twitter")}><p className="font-semibold text-default-400 text-small mx-1">Twitter</p></Checkbox>
                 </div> 
                 <p className="text-center text-small">
                   Already have an account?{" "}

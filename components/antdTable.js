@@ -3,8 +3,8 @@ import {FiSearch} from "react-icons/fi"
 import { useRouter } from 'next/navigation'
 import React, { useRef, useState , useEffect} from 'react';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table } from 'antd';
-import {User} from "@nextui-org/react"
+import {  Button, Input, Space, Table } from 'antd';
+import {User, Avatar} from "@nextui-org/react"
 import thriftyABI from "../data/thriftyABI.json"
 import accountABI from "../data/accountAbi.json"
 import {JsonRpcProvider, Contract} from "ethers"
@@ -246,13 +246,11 @@ const App = () => {
       const userId = await thriftyNFT.userByTokenId(index);
       let user = {
         key: account,
-      name : <User   
-        // name="Jane Doe"
-        // description="Product Designer"
-        avatarProps={{
-          src: {uri}
-        }}
-      />,
+      name : <div className="flex gap-2">
+          <Avatar src={uri} size="sm" rounded="full" />
+          <p></p>
+   </div>
+      ,
       price : Number(status[0].toString()/(10**18)).toFixed(4),
       // user.push(slicedAddress)
       volume : (Number(status[1].toString()/(10**18)).toFixed(4)) ,
@@ -279,6 +277,8 @@ const App = () => {
     return {
       onClick: (e) => {router.push(`https://socifi.vercel.app/user/nft?address=${record.key}`)}, // click row
     };
-  }}/>;
+  }}
+  loading={data.length == 0}
+  />;
 };
 export default App;

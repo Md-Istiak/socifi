@@ -7,7 +7,7 @@ import {BsWallet2} from "react-icons/bs"
 import {RiNftFill} from "react-icons/ri"
 
 
-export default  function UserAbout(){
+export default  function UserAbout(props){
   
   const { data: session, status } = useSession()
   const [User, setUser] = useState(session);
