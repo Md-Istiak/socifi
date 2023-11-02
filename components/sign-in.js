@@ -11,6 +11,7 @@ import thriftyLogo from "../public/images/icon-192x192.png"
 import {mint} from "../data/contract"
 
 export default  function SignIn(){
+  
   const router = useRouter()
     const { data: session, status } = useSession()
     // const provider = await getProviders()

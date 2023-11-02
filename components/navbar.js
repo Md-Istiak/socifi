@@ -3,10 +3,13 @@ import {useState, useEffect} from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { usePathname } from 'next/navigation'
 import {LinkTo} from 'next/link'
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem,NavbarMenuToggle, Button, Input, DropdownItem,Link, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
+import metamask from "../public/images/metmask.png"
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem,NavbarMenuToggle, Button, Input, DropdownItem,Link, Badge, DropdownTrigger, Dropdown, DropdownMenu, Avatar, NavbarMenuItem, NavbarMenu, Tooltip} from "@nextui-org/react";
 import {AcmeLogo} from "./AcmeLogo";
-import { FiAlignJustify, FiHome, FiSearch} from "react-icons/fi";
-
+import { FiAlignJustify, FiHome, FiSearch, FiMessageCircle, FiMessageSquare} from "react-icons/fi";
+import {BsWallet2} from "react-icons/bs"
+import {GrNotification} from "react-icons/gr"
+import {GiFoxHead} from "react-icons/gi"
 export default function App() {
   const pathname = usePathname()
   console.log(pathname)
@@ -26,16 +29,13 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    "Profile",
+    "Home",
     "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    "People",
+    "Groups",
+    "Marketplace",
+    "Favorites",
+    "Settings"
   ];
 
   return (
@@ -49,26 +49,7 @@ export default function App() {
           <AcmeLogo />
           <p className="font-bold text-black">Thrifty</p>
         </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-8" >
-        <NavbarItem  isActive={pathname == "/reg"}>
-          <Link color="foreground" href="/reg">
-            {/* <  FiAlignJustify size={25}/> */}
-            <span className="font-semibold text-default-600 text-medium">Home</span>
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={pathname == "/sw.js"} >
-          <Link  color="foreground" href="/" aria-current="page">
-          {/* <FiHome size={25}/> */}
-          <span className="font-semibold text-default-600 text-medium">Trade View</span>
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            {/* < FiHome size={25}/> */}
-            <span className="font-semibold text-default-600 text-medium">Marketplace</span>
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
+       
 
       </NavbarContent>
 
@@ -86,9 +67,23 @@ export default function App() {
           startContent={<FiSearch size={18} />}
           type="search"
         />
-       { state == "authenticated" ?
+        <NavbarItem>
+        <Badge content="5" color="warning"><GrNotification size={25}/></Badge>
+        </NavbarItem>
+        <NavbarItem>
+        <Badge content="5" color="warning"><FiMessageSquare size={25}/></Badge>
+         
+        </NavbarItem>
+       {/* { state == "authenticated" ? */}
         <Dropdown >
       <DropdownTrigger>
+
+      <Badge
+        isOneChar
+        content={<Tooltip content="metamask connected"><GiFoxHead /></Tooltip>}
+        color="success"
+        placement="bottom-right"
+      >
       <Avatar
               isBordered
               as="button"
@@ -96,28 +91,107 @@ export default function App() {
               color="secondary"
               name="Jason Hughes"
               size="sm"
-              src={User.user.image}
+              src="https://pbs.twimg.com/profile_images/1657834006229164034/DQSW-DS3_400x400.jpg"
             />
+        </Badge>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions" className="">
       <DropdownItem key="profile" className="h-14 gap-2" >
               <p className="font-semibold text-default-800">signed in as</p>
-              <p className="font-semibold text-default-800">{User.user.name}</p>
+              <p className="font-semibold text-default-800">{"istiak"}</p>
             </DropdownItem>
             <DropdownItem key="settings" className="text-default-800"><Link href="/user/4">My Profile</Link></DropdownItem>
-            <DropdownItem key="team_settings" className="text-default-800">Team Settings</DropdownItem>
-            <DropdownItem key="analytics" className="text-default-800">Analytics</DropdownItem>
-            <DropdownItem key="system" className="text-default-800">System</DropdownItem>
-            <DropdownItem key="configurations" className="text-default-800">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback" className="text-default-800">Help & Feedback</DropdownItem>
+            <DropdownItem key="team_settings" className="text-default-800"
+             startContent={
+              <div className="flex gap-1">
+                <BsWallet2/>
+                <h6>dappWallet</h6>
+              </div>
+             } 
+             endContent={<h4>0.2334 AVAX</h4>}
+             />
+            <DropdownItem key="analytics" className="text-default-800"
+            startContent={
+              <div className="flex gap-1">
+                <FiMessageCircle/>
+                <h6>Messages</h6>
+              </div>
+             } 
+             endContent={<h4>10</h4>}
+             />
+            <DropdownItem key="system" className="text-default-800"
+            startContent={
+              <div className="flex gap-1">
+                <GrNotification/>
+                <h6>Messages</h6>
+              </div>
+             } 
+             endContent={<h4>23</h4>}
+             />
+            <DropdownItem key="configurations" className="text-default-800"startContent={
+              <div className="flex gap-1">
+                <GrNotification/>
+                <h6>Deshboard</h6>
+              </div>
+             } 
+             
+             />
+            <DropdownItem key="help_and_feedback" className="text-default-800"startContent={
+              <div className="flex gap-1">
+                <GrNotification/>
+                <h6>My NFTs</h6>
+              </div>
+             } 
+             
+             />
+             <DropdownItem key="help_and_feedback" className="text-default-800"startContent={
+              <div className="flex gap-1">
+                <GrNotification/>
+                <h6>Reffaral and Gifts</h6>
+              </div>
+             } 
+             
+             />
+             <DropdownItem key="help_and_feedback" className="text-default-800"startContent={
+              <div className="flex gap-1">
+                <GrNotification/>
+                <h6>Friends and followers</h6>
+              </div>
+             } 
+             
+             />
+             <DropdownItem key="help_and_feedback" className="text-default-800"startContent={
+              <div className="flex gap-1">
+                <GrNotification/>
+                <h6>Settings</h6>
+              </div>
+             } 
+             
+             />
+             <DropdownItem key="help_and_feedback" className="text-default-800"startContent={
+              <div className="flex gap-1">
+                <GrNotification/>
+                <h6>Terms And Conditions</h6>
+              </div>
+             } 
+             
+             />
+             <DropdownItem key="help_and_feedback" className="text-default-800"startContent={
+              <div className="flex gap-1">
+                <GrNotification/>
+                <h6>Privacy Policy</h6>
+              </div>
+             } 
+             
+             />
             <DropdownItem key="logout" color="danger" className="text-default-800" onClick={() => signOut({redirect:false})}>
               Log Out
             </DropdownItem>
       </DropdownMenu>
     </Dropdown>
-:
+{/* :
  <Button onClick={() => signIn('github', {redirect:false})}> Sign In </Button>
-} 
+}  */}
         {/* <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
@@ -147,6 +221,22 @@ export default function App() {
           </DropdownMenu>
         </Dropdown> */}
       </NavbarContent>
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              color={
+                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+              }
+              className="w-full"
+              href="#"
+              size="lg"
+            >
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </Navbar>
   );
 }

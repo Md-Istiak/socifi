@@ -1,6 +1,3 @@
-'use client'
-
-import Image from 'next/image'
 import MasterWidget from "../components/masterWidget"
 
 
@@ -8,7 +5,6 @@ import MasterWidget from "../components/masterWidget"
 export default function Home() {
  
   return (
-    
     <main className="h-screen">
       <MasterWidget />
     </main>

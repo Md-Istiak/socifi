@@ -1,20 +1,24 @@
 "use client"
 import {useEffect, useState} from "react";
-import getContract from "../data/contract";
+import {getContract} from "../data/contract";
 import MasterTable from "./antdTable";
 import {GrOverview} from "react-icons/gr"
 import {Card, CardHeader, CardBody, Divider,Accordion, AccordionItem, Avatar, AvatarGroup, Tabs, Tab} from "@nextui-org/react"
 export default function Widget(){
-    
-    const [data, setdata] = useState([])
-    // useEffect(() => {
-    //   getContract().then((res)=> {
-    //     setdata(res)
-    //     console.log(res)
-    //   })},[]);
+    const [data, setData] = useState([])
+    const [nft, setNFT] = useState()
+    const [totalnft,setTotal] = useState()
+    const [user, setUser] = useState()
+    useEffect(() => {
+        const fetchContract = async ()=>{
+          const [thriftyNFt, accountCount, users] = await getContract();
+          setNFT(thriftyNFt); setTotal(accountCount) ; setUser(users);
+        }
+        fetchContract();
+      },[]);
+
     return(
         <>
-       
         <Accordion fullWidth={true} className="" >
       <AccordionItem key="1" aria-label="Accordion 1" title={
         <div className="flex space-x-2">

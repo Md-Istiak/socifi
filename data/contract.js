@@ -11,14 +11,31 @@ import EthCrypto from "eth-crypto";
 const publicKey = EthCrypto.publicKeyByPrivateKey(
     '0x045bf9e0ed1b2653ebe288b5bfc6a5d30936764f35ec8d9f69b59bbddc513cbf'
 );
+
 export const getcontract = async()=>{
   var customHttpProvider = new JsonRpcProvider(
     "https://api.avax-test.network/ext/C/rpc"
   );
-  const users = [];
-console.log(customHttpProvider)
-  const thriftyNFT = new Contract("0x205D8513bC1ad6F5345C73392A49D629A7b8b5c0", thriftyABI, customHttpProvider);
-  console.log(thriftyNFT);
+const thriftyNFT = new Contract("0x205D8513bC1ad6F5345C73392A49D629A7b8b5c0", thriftyABI, customHttpProvider);
+const numAccount = Number(await thriftyNFT._tokenIds());
+var user = [];
+var volume;
+var TVL;
+for (let index = 0; index < numAccount; index++) {
+  const account = await thriftyNFT.TBAbytokenId(index);
+  const nftInfo  = await thriftyNFT.nfts(account);
+  user.push(account)
+  volume += Number(nftInfo[1]);
+  TVL += Number(nftInfo[20]);
+}
+return [thriftyNFT,numAccount, user];
+}
+
+export const getData = async()=>{
+  var customHttpProvider = new JsonRpcProvider(
+    "https://api.avax-test.network/ext/C/rpc"
+  );
+const thriftyNFT = new Contract("0x205D8513bC1ad6F5345C73392A49D629A7b8b5c0", thriftyABI, customHttpProvider);
 const numAccount = Number(await thriftyNFT._tokenIds());
 for (let index = 0; index < numAccount; index++) {
   let user 
