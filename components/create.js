@@ -1,6 +1,7 @@
 import {Avatar, Textarea, Button, Divider, Tooltip} from "@nextui-org/react"
 import {FiPlusCircle, FiImage} from "react-icons/fi";
-export default function homePost(){
+export default function homePost(props){
+  const {openModal} = props;
     return(
         <>
         {/* <div className="w-full flex  justify-between"> */}
@@ -22,7 +23,7 @@ export default function homePost(){
             <div  className="w-5/6 flex justify-between mt-1 pl-11">
               <div className="flex gap-9  pl-5">
               <Tooltip content="Create An NFT">
-              <Button isIconOnly className="bg-transparent" size="sm"><FiPlusCircle size={20} /></Button>
+              <Button isIconOnly className="bg-transparent" size="sm" onClick={openModal}><FiPlusCircle size={20} /></Button>
               </Tooltip>
               <Tooltip content="Add photos">
               <Button isIconOnly className="bg-transparent" size="sm"><FiImage size={20} /></Button>

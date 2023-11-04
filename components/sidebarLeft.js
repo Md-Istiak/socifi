@@ -1,5 +1,6 @@
 import React from "react";
 import {Listbox, ListboxItem} from "@nextui-org/react";
+import { useRouter } from 'next/navigation'
 // import {IconWrapper} from "./IconWrapper";
 // import {ItemCounter} from "./ItemCounter";
 // import {BugIcon} from "./BugIcon";
@@ -14,6 +15,7 @@ import {Listbox, ListboxItem} from "@nextui-org/react";
 // import {ChevronRightIcon} from "./ChevronRightIcon";
 
 export default function App() {
+  const router = useRouter()
   return (
     <div className="w-full flex  justify-end" >
     <Listbox
@@ -28,12 +30,14 @@ export default function App() {
       <ListboxItem
         key="home"
         color="black"
+        onClick={router.push(`https://socifi.vercel.app/home`)}
         
       > 
         <h4 className="text-default-800 text-lg font-bold">Home</h4>
       </ListboxItem>
       <ListboxItem
         key="dashboard"
+        onClick={router.push(`https://socifi.vercel.app`)}
       > 
         <h4 className="text-default-800 text-lg font-bold">Dashboard</h4>
       </ListboxItem>
@@ -48,7 +52,8 @@ export default function App() {
         <h4 className="text-default-800 text-lg font-bold">Groups</h4>
       </ListboxItem>
       <ListboxItem
-        key="premium"
+        key="marketplace"
+        onClick={router.push(`https://socifi.vercel.app/marketplace`)}
       > 
         <h4 className="text-default-800 text-lg font-bold">Marketplace</h4>
       </ListboxItem>

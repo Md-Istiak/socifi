@@ -42,9 +42,7 @@ export default  function UserAbout(props){
         </Button>
         </div>
         <div className="px-3 py-1 text-small text-default-400">
-        <p>
-          Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
-        </p>
+        <h3>NFT Address: </h3><Snippet>0x000000000000000000000000000000 </Snippet>
         <span className="pt-2">
           #FrontendWithZoey 
           <span className="py-2" aria-label="computer" role="img">
@@ -139,7 +137,7 @@ export default  function UserAbout(props){
       </AccordionItem>
     </Accordion>
        
-        <Divider className="my-2" />
+       
       {/* <div className=" w-full flex h-5 items-start space-x-4 text-small">
         <div>DASHBOARD</div>
         <Divider orientation="vertical" />

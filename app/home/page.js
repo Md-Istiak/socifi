@@ -1,12 +1,16 @@
 "use client"
-import {Card, CardHeader, Image, Button, CardFooter, Avatar} from "@nextui-org/react"
+import {Card, CardHeader, Image, Button, CardFooter, Avatar, useDisclosure} from "@nextui-org/react"
 import SidebarLeft from "../../components/sidebarLeft"
 import SidebarRight from "../../components/sidebarRight"
 import NotiFy from "../../components/notifycard"
 import Create from "../../components/create"
 import PostList from "../../components/postlist"
+import CreateModal from "../../components/createmodal"
 export default function home(){
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
     return(
+      <>
+      <CreateModal isOpen={isOpen} onOpenChange={onOpenChange} />
       // <div className="w-full grid 2xl:w-20% justify-center">
         <div className="grid  grid-cols-12 grid-rows-1 justify-center bg-white "> 
         <div className="hidden sm:grid col-span-2 "><SidebarLeft /></div>
@@ -134,12 +138,13 @@ export default function home(){
       />
     </Card>
   </div>
-          <Create/>
+          <Create openModal={onOpen}/>
           <PostList />
           
         </div>
         {/* <div className="hidden sm:grid col-span-2 "><SidebarRight/></div> */}
         </div>
         // </div>
+        </>
     )
 }
