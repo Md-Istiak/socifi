@@ -21,7 +21,7 @@ export default function App() {
     <Listbox
       aria-label="User Menu"
       color="primary"
-      onAction={(key) => alert(key)}
+      onClick={(key) => router.push(`https://socifi.vercel.app/${key}`)}
       className="w-full gap-0 divide-y divide-default-300/50 dark:divide-default-100/80 bg-transparent max-w-[300px] overflow-visible shadow-small "
       itemClasses={{
         base: "px-3 first:rounded-t-medium last:rounded-b-medium rounded-none gap-3 h-12 data-[hover=true]:bg-default-100/80",
@@ -30,14 +30,14 @@ export default function App() {
       <ListboxItem
         key="home"
         color="black"
-        onClick={router.push(`https://socifi.vercel.app/home`)}
+       
         
       > 
         <h4 className="text-default-800 text-lg font-bold">Home</h4>
       </ListboxItem>
       <ListboxItem
         key="dashboard"
-        onClick={router.push(`https://socifi.vercel.app`)}
+        
       > 
         <h4 className="text-default-800 text-lg font-bold">Dashboard</h4>
       </ListboxItem>
@@ -53,12 +53,12 @@ export default function App() {
       </ListboxItem>
       <ListboxItem
         key="marketplace"
-        onClick={router.push(`https://socifi.vercel.app/marketplace`)}
+        
       > 
         <h4 className="text-default-800 text-lg font-bold">Marketplace</h4>
       </ListboxItem>
       <ListboxItem
-        key="marketplace"
+        key="premium"
       > 
         <h4 className="text-default-800 text-lg font-bold">Premium</h4>
       </ListboxItem>
