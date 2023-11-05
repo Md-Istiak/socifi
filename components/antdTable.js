@@ -161,7 +161,7 @@ const App = () => {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      width: '20%',
+      width: '5%',
       fixed: 'left',
       ...getColumnSearchProps('name'),
     },
@@ -219,7 +219,7 @@ const App = () => {
       title: 'Activity',
       dataIndex: 'activity',
       key: 'activity',
-      width: '10%',
+      width: '7%',
       fixed: 'right',
       // ...getColumnSearchProps('address'),
       // sorter: (a, b) => a.address.length - b.address.length,
@@ -258,7 +258,8 @@ const App = () => {
       holder : (""),
       address : slicedAddress,
       activity : 
-        <Button radius="full" className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg" >Buy</Button>
+        <Button  size="small"
+        className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg rounded-lg" >Buy</Button>
       
       }
 
@@ -275,7 +276,7 @@ const App = () => {
   }}
   onRow={(record) => {
     return {
-      onClick: (e) => {router.push(`https://socifi.vercel.app/user/nft?address=${record.key}`)}, // click row
+      onClick: (e) => {router.push(process.env.NEXTAUTH_URL.concat(`user/nft?address=${record.key}`))}, // click row
     };
   }}
   loading={data.length == 0}

@@ -27,7 +27,7 @@ export default  function SignIn(){
     const connected =  async() => {
       setDisable(true)
       const user =  await mint(User, account, router);
-      router.replace(`https://socifi.vercel.app/user/nft?address=${user}`)
+      router.replace(process.env.NEXTAUTH_URL.concat(`user/nft?address=${user}`))
       
       // try {
       //   const accounts = await sdk?.connect();

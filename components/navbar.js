@@ -1,18 +1,18 @@
 "use client"
 import {useState, useEffect} from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
-import { usePathname } from 'next/navigation'
+import { usePathname , useRouter} from 'next/navigation'
 import {LinkTo} from 'next/link'
 import metamask from "../public/images/metmask.png"
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem,NavbarMenuToggle, Button, Input, DropdownItem,Link, Badge, DropdownTrigger, Dropdown, DropdownMenu, Avatar, NavbarMenuItem, NavbarMenu, Tooltip} from "@nextui-org/react";
-import {AcmeLogo} from "./AcmeLogo";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem,NavbarMenuToggle, Button, Input,  DropdownItem,Link, Badge, DropdownTrigger, Dropdown, DropdownMenu, Avatar, NavbarMenuItem, NavbarMenu, Tooltip} from "@nextui-org/react";
+import Logo from "../components/AcmeLogo"
 import { FiAlignJustify, FiHome, FiSearch, FiMessageCircle, FiMessageSquare} from "react-icons/fi";
 import {BsWallet2} from "react-icons/bs"
 import {GrNotification} from "react-icons/gr"
 import {GiFoxHead} from "react-icons/gi"
-export default function App() {
+export default function Nav(){
   const pathname = usePathname()
-  console.log(pathname)
+  const router = useRouter()
   const { data: session, status } = useSession()
   const [User, setUser] = useState(session);
   const [state, setStatus] = useState(status)
@@ -22,6 +22,16 @@ export default function App() {
   //   setUser(session)
   //   setStatus(status)
   // } , [])
+
+  const handlelink = (keyword)=>{
+    const path = keyword.toLowerCase()
+    // if(path == "dashboard"){
+    //   router.push(process.env.NEXTAUTH_URL)
+    // }else{
+    // router.push(process.env.NEXTAUTH_URL.concat(path))
+    // }
+    
+  }
   useEffect(()=>{
     setUser(session)
     setStatus(status)
@@ -31,10 +41,10 @@ export default function App() {
   const menuItems = [
     "Home",
     "Dashboard",
-    "People",
+    "Message",
     "Groups",
     "Marketplace",
-    "Favorites",
+    "Premium",
     "Settings"
   ];
 
@@ -46,8 +56,8 @@ export default function App() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-black">Thrifty</p>
+          {/* <Logo/> */}
+          <p className=" font-bold text-black">Thrifty</p>
         </NavbarBrand>
        
 
@@ -57,7 +67,7 @@ export default function App() {
       <NavbarContent as="div" className="items-center" justify="end">
         <Input
           classNames={{
-            base: "max-w-full sm:max-w-[10rem] h-10",
+            base: "max-w-[40px] sm:max-w-[10rem] h-10",
             mainWrapper: "h-full",
             input: "text-small",
             inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
@@ -78,12 +88,12 @@ export default function App() {
         <Dropdown >
       <DropdownTrigger>
 
-      <Badge
+      {/* <Badge
         isOneChar
         content={<Tooltip content="metamask connected"><GiFoxHead /></Tooltip>}
         color="success"
         placement="bottom-right"
-      >
+      > */}
       <Avatar
               isBordered
               as="button"
@@ -93,7 +103,7 @@ export default function App() {
               size="sm"
               src="https://pbs.twimg.com/profile_images/1657834006229164034/DQSW-DS3_400x400.jpg"
             />
-        </Badge>
+        {/* </Badge> */}
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions" className="">
       <DropdownItem key="profile" className="h-14 gap-2" >
@@ -223,17 +233,10 @@ export default function App() {
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
+          <NavbarMenuItem key={`${item}-${index}`}
+          onClick={handlelink(item)}
+          >
+            {item}
           </NavbarMenuItem>
         ))}
       </NavbarMenu>

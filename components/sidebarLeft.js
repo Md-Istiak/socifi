@@ -16,22 +16,27 @@ import { useRouter } from 'next/navigation'
 
 export default function App() {
   const router = useRouter()
+  const handlesidebar = (keyword)=>{
+    console.log(`${process.env.NEXTAUTH_URL}${keyword}`)
+    if(keyword == "dashboard"){
+      router.push(process.env.NEXTAUTH_URL)
+    }else{
+    router.push(process.env.NEXTAUTH_URL.concat(keyword))
+    }
+    
+  }
   return (
     <div className="w-full flex  justify-end" >
     <Listbox
       aria-label="User Menu"
-      color="primary"
-      onClick={(key) => router.push(`https://socifi.vercel.app/${key}`)}
-      className="w-full gap-0 divide-y divide-default-300/50 dark:divide-default-100/80 bg-transparent max-w-[300px] overflow-visible shadow-small "
+      onAction={(key) => handlesidebar(key)}
+      className="p-0 gap-0 divide-y divide-default-300/50 dark:divide-default-100/80 bg-content1 max-w-[300px] overflow-visible shadow-small rounded-medium"
       itemClasses={{
         base: "px-3 first:rounded-t-medium last:rounded-b-medium rounded-none gap-3 h-12 data-[hover=true]:bg-default-100/80",
       }}
     >
       <ListboxItem
-        key="home"
-        color="black"
-       
-        
+        key="home" 
       > 
         <h4 className="text-default-800 text-lg font-bold">Home</h4>
       </ListboxItem>
